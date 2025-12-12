@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Slider Input</title>
+    <style>
+        #slider_input { width: 300px; }
+        .output-box { 
+            font-size: 1.5em; 
+            font-weight: bold; 
+            margin-top: 10px; 
+            color: darkblue; 
+        }
+    </style>
+</head>
+<body>
+    <h2>Make a prediction of the value of the S&P 500 by entering an estimate of next month's CPI using the Slider</h2>
+    
+    <form method="POST" action="{{ url_for('process_slider') }}">
+        
+        <label for="slider_input">CPI Value:</label>
+        
+        <span class="output-box" id="current_value">{{current_value}}</span>
+        
+        <br><br>
+        
+        <input 
+            type="range" 
+            id="slider_input" 
+            name="slider_input" 
+            min="{{min_val}}"      max="{{max_val}}"    value="{{current_value}}"   step="1"     >
+        
+        <br><br>
+        <button type="submit">Make Prediction</button>
+    </form>
+
+    <script>
+
+        const slider = document.getElementById('slider_input');
+        const output = document.getElementById('current_value');
+
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+        }
+    </script>
+</body>
+</html>
